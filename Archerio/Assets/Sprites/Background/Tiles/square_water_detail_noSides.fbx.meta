@@ -3,7 +3,17 @@ guid: 686ad90924dea1a4d81624f6849923a7
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BrownDark
+    second: {fileID: 2100000, guid: e3b042af3e337744993f4b519963acfd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Water
+    second: {fileID: 2100000, guid: 904c7f3b16afcdf4cba4455f38af563e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
