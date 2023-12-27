@@ -1,11 +1,19 @@
 using UnityEngine;
 
 namespace Archerio {
-
-    public class Archer : MonoBehaviour {
-        [SerializeField] private float _moveSpeed;
-
+    [RequireComponent(typeof(ArcherModel))]
+    [RequireComponent(typeof(ArcherView))]
+    public class ArcherController : MonoBehaviour {
         [SerializeField] private GameInput gameInput;
+
+        private ArcherModel  _model;
+        private ArcherView _view;
+
+        private void Awake() {
+            _model = GetComponent<ArcherModel>();
+            _view = GetComponent<ArcherView>();
+            _view.Construct(_model);
+        }
 
         private void Update() {
             Vector2 inputVector = gameInput.GetMovementVectorNormalized();
@@ -22,17 +30,18 @@ namespace Archerio {
                 }
             }
             
-            if (CanMove(moveDirection)) transform.position += _moveSpeed * Time.deltaTime * moveDirection;
+            if (CanMove(moveDirection)) transform.position += _model.MoveSpeed * Time.deltaTime * moveDirection;
+
+            _model.IsRun = moveDirection != Vector3.zero;
             
-            float rotateSpeed = 10f;
-            transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * rotateSpeed);
+            transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * _model.RotateSpeed);
         }
     
 
         private bool CanMove(Vector3 moveDirection) {
-            float playerRadius = .7f;
-            float playerHeight = 2f;
-            float moveDistance = _moveSpeed * Time.deltaTime;
+            float playerRadius = .5f;
+            float playerHeight = 2.3f;
+            float moveDistance = _model.MoveSpeed * Time.deltaTime;
 
             bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up * playerHeight, playerRadius, moveDirection, moveDistance);
 
