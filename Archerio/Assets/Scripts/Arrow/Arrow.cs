@@ -45,7 +45,7 @@ namespace Archerio {
         }
 
         private void OnTriggerEnter(Collider other) {
-            if (other.TryGetComponent<EnemyModel>(out var enemy) == true) {
+            if (other.TryGetComponent<EnemyModel>(out var enemy)) {
                 enemy.TakeDamage(_damage);
                 ResetArrow();
             }

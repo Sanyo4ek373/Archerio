@@ -31,8 +31,8 @@ namespace Archerio {
                 transform.forward = Vector3.Slerp(transform.forward, moveDirection, Time.deltaTime * _model.RotateSpeed);
             }
             
-            float distanceToTarget = Math.Abs(transform.position.x) + Math.Abs(transform.position.z);
-            if (distanceToTarget < FirstEnemyPosition()) _enemyPool.MakeEnemyFirst(gameObject);
+            Vector3 firstEnemyPosition = _enemyPool.GetEnemy().transform.position;
+            if (FindEnemyPosition(transform.position) < FindEnemyPosition(firstEnemyPosition)) _enemyPool.MakeEnemyFirst(gameObject);
 
             _model.IsAttack = _canAttack;
             _model.IsRun = !_canAttack;
@@ -42,8 +42,8 @@ namespace Archerio {
             }
         }
 
-        private float FirstEnemyPosition() {
-            Vector3 position =_target.transform.position - _enemyPool.GetEnemy().transform.position;
+        private float FindEnemyPosition(Vector3 selfPosition) {
+            Vector3 position =_target.transform.position - selfPosition;
             float distance = Math.Abs(position.x) + Math.Abs(position.z);
             return distance;
         }
