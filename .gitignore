@@ -5,6 +5,7 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+/*_DoNotShip/
 
 # MemoryCaptures can get excessive in size.
 # They also could contain extremely sensitive data
@@ -39,7 +40,6 @@ ExportedObj/
 *.mdb
 *.opendb
 *.VC.db
-*/armeabi-v7a/
 
 # Unity3D generated meta files
 *.pidb.meta
